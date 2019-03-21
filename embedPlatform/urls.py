@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-
+from embed_nju import process_data
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^upload_data/', )
+    url(r'^upload_data/', process_data.upload_data),
+    url(r'', process_data.space)
 ]

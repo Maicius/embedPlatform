@@ -12,7 +12,9 @@ def upload_data(request):
     return_success()
 
 def return_success():
-
     response_data = {'result': '200'}
     print(response_data)
     return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+def space(request):
+    return render(request, 'show_data.html')
