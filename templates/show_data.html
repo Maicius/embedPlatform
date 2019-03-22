@@ -12,16 +12,21 @@
   <!--顶部导航栏-->
   <div class="navbar navbar-fixed-top my_nav">
     <div class="navbar-header">
-      <a class="navbar-brand navbar-brand-name navbar_name"><i class="fa fa-square-o "></i>&nbsp;智能传感器监控平台</a>
+      <a class="navbar-brand navbar-brand-name navbar_name"><i class="fa fa-square-o "></i>智能小车监控平台<img
+        src="../static/image/car.png" class="car_icon"/>&nbsp;</a>
     </div>
   </div>
   <div class="col-md-8 col-lg-8 col-xs-12 main_content">
     <div class="dom">
       <div class="col-lg-6 col-md-6 col-xs-12 small_dom" id="temperature">
-        hello
+        油箱温度
       </div>
       <div class="col-lg-6 col-md-6 col-xs-12 small_dom" id="light">
-        hello1
+{#        <div class="bootstrap-switch bootstrap-switch-large" data-on="primary" data-off="info">#}
+{#          <input type="checkbox" checked/>#}
+{#        </div>#}
+
+        <img src="../static/image/car_light.png" class="car_light"/>
       </div>
       <div class="col-lg-12 col-md-12 col-xs-12 big_dom" id="light">
         hello2
@@ -32,11 +37,14 @@
 </div>
 
 <link rel="stylesheet" href="../static/css/bootstrap.css" type="text/css">
+<link rel="stylesheet" href="../static/css/bootstrap-switch.min.css" type="text/css">
 <link rel="stylesheet" href="../static/css/style.css" type="text/css">
 <script src="../static/js/jquery.min.js"></script>
 <script src="../static/js/bootstrap.js"></script>
 <script src="../static/js/avalon.js"></script>
-<script src="../static/js/echarts.common.js"></script>
+<script src="../static/js/echarts.min.js"></script>
+<script src="../static/js/constant.js"></script>
+<script src="../static/js/bootstrap-switch.min.js"></script>
 <script src="../static/js/draw.js"></script>
 <script src="../static/js/main.js"></script>
 </body>

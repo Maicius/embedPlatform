@@ -29,23 +29,23 @@ def send_light():
     i = 0
     while i < 100:
         distance = random.randint(1, 100)
-        requests.get(url='http://127.0.0.1:8000/upload_temperature?light=' + str(distance))
+        requests.get(url='http://127.0.0.1:8000/upload_light?light=' + str(distance))
         i += 1
         sleep(10)
 
 if __name__ == '__main__':
     dis = multiprocessing.Process(target=send_distance)
     dis.daemon = True
-    # temp = multiprocessing.Process(target=send_temperature)
-    # temp.daemon = True
-    # light = multiprocessing.Process(target=send_light)
-    # light.daemon = True
+    temp = multiprocessing.Process(target=send_temperature)
+    temp.daemon = True
+    light = multiprocessing.Process(target=send_light)
+    light.daemon = True
 
     dis.start()
+
+    temp.start()
+    light.start()
+
     dis.join()
-    # temp.start()
-    # light.start()
-    #
-    #
-    # temp.join()
-    # light.join()
+    temp.join()
+    light.join()

@@ -41,21 +41,14 @@ def get_data(request):
     start = request.GET.get('start')
     conn = redis.Redis(connection_pool=get_pool())
     stop = conn.llen(DISTANCE_KEY)
-    try:
-        distance_list = conn.lrange(DISTANCE_KEY, start + 1, stop)
-    except:
-        distance_list = []
-    try:
-        temperature = conn.lindex(TEMPERATURE_KEY, -1)
-    except:
-        temperature = json.dumps(dict(time='', value='0'))
-    try:
-        light = conn.lindex(LIGHT_KEY, -1)
-    except:
-        light = json.dumps(dict(time='', value='0'))
 
+    distance_list = conn.lrange(DISTANCE_KEY, int(start) + 1, stop)
+
+    temperature = conn.lindex(TEMPERATURE_KEY, -1)
+
+    light = conn.lindex(LIGHT_KEY, -1)
     result = {}
-    result['distance'] = distance_list
+    result['distance_list'] = distance_list
     result['start'] = stop
     result['light'] = light
     result['temperature'] = temperature

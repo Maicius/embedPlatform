@@ -36,8 +36,7 @@
 }
 .small_dom {
     display: block;
-    height: 200px;
-    background: white;
+    height: 400px;
     border: #2a6496 2px solid;
     border-radius: 10px;
 }
@@ -45,5 +44,17 @@
     margin-top: 70px;
 }
 .big_dom {
+    margin-top: 20px;
     height: 500px;
+}
+.car_icon {
+    margin-left: 20px;
+    width: 40px;
+}
+.car_light {
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+    margin-top: 100px;
+    vertical-align: center;
 }
