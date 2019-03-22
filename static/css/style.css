@@ -1,0 +1,49 @@
+.my_nav {
+    background-color: #395990;
+    opacity: 1.0;
+    box-shadow: 1px 1px 20px 1px #395990;
+}
+
+.space_content {
+    position: relative;
+    width: 100%;
+    background: #eee8d8;
+    height: 100vh;
+    margin-top: 0;
+}
+.navbar_name {
+    font-size: 20px;
+    color: white;
+}
+
+.navbar_name:hover,
+.navbar_name:focus {
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+.main_content {
+    display: block;
+    position: absolute;
+    margin: 0 auto;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #404a59;
+    box-shadow: 1px 1px 20px 1px #404a59;
+}
+.small_dom {
+    display: block;
+    height: 200px;
+    background: white;
+    border: #2a6496 2px solid;
+    border-radius: 10px;
+}
+.dom {
+    margin-top: 70px;
+}
+.big_dom {
+    height: 500px;
+}
