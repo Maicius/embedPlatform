@@ -24,8 +24,10 @@ def upload_light(request):
 
 def pre_process_data(data, key):
     now = int(time.time())
+    timeArray = time.localtime(now)
+    time_str = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
     conn = redis.Redis(connection_pool=get_pool())
-    distance_dict = json.dumps(dict(time=now, value=data))
+    distance_dict = json.dumps(dict(time=time_str, value=data))
     print(key, '===============')
     print(distance_dict)
     conn.rpush(key, str(distance_dict))

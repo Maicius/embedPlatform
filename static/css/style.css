@@ -45,7 +45,7 @@
 }
 .big_dom {
     margin-top: 20px;
-    height: 500px;
+    height: 450px;
 }
 .car_icon {
     margin-left: 20px;
@@ -55,7 +55,7 @@
     display: block;
     margin: 0 auto;
     width: 30%;
-    height:72px;
+    height:90px;
     margin-top: 20px;
     background-image: url("../image/car_light.png");
     background-size: 100%;
