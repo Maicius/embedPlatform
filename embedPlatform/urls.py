@@ -18,6 +18,9 @@ from django.contrib import admin
 from embed_nju import process_data
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^upload_data/', process_data.upload_data),
-    url(r'', process_data.space)
+    url(r'^upload_distance', process_data.upload_distance),
+    url(r'^upload_temperature', process_data.upload_temperature),
+    url(r'^upload_light', process_data.upload_light),
+    url(r'^get_data', process_data.get_data),
+    url(r'^$', process_data.space)
 ]
