@@ -54,8 +54,8 @@
 .car_light {
     display: block;
     margin: 0 auto;
-    width: 30%;
-    height:90px;
+    max-width: 20%;
+    min-height:90px;
     margin-top: 20px;
     background-image: url("../image/car_light.png");
     background-size: 100%;

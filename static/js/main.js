@@ -14,12 +14,13 @@ let vm = avalon.define({
             url: '/get_data?start=' + vm.start,
             type: 'get',
             success: function (data) {
+                console.log(data.distance_list.length);
                 if (data.distance_list.length > 0){
+
                      vm.distance_list = vm.distance_list.concat(data.distance_list);
                      vm.draw_distance();
                 }
-                   
-                
+
                 if (data.temperature) {
                     vm.temperature = data.temperature.value;
                     vm.draw_temperature();
@@ -34,6 +35,7 @@ let vm = avalon.define({
         })
     },
     draw_temperature: function () {
+        console.log("draw gauge");
         draw_gauge(temp_dom, vm.temperature, '油箱温度');
     },
     draw_light: function () {
@@ -42,6 +44,7 @@ let vm = avalon.define({
     },
     
     draw_distance: function () {
+        console.log("draw line");
         draw_line(distance_dom, vm.distance_list);
     }
 

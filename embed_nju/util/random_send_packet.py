@@ -23,15 +23,15 @@ def send_temperature():
         distance = random.randint(1, 100)
         requests.get(url='http://127.0.0.1:8000/upload_temperature?temperature=' + str(distance))
         i += 1
-        sleep(5)
+        sleep(2)
 
 def send_light():
     i = 0
     while i < 100:
-        distance = random.randint(1, 100)
+        distance = random.randint(200, 1000)
         requests.get(url='http://127.0.0.1:8000/upload_light?light=' + str(distance))
         i += 1
-        sleep(10)
+        sleep(2)
 
 if __name__ == '__main__':
     dis = multiprocessing.Process(target=send_distance)

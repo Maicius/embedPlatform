@@ -44,7 +44,7 @@ def get_data(request):
     conn = redis.Redis(connection_pool=get_pool())
     stop = conn.llen(DISTANCE_KEY)
 
-    distance_list = conn.lrange(DISTANCE_KEY, int(start) + 1, stop)
+    distance_list = conn.lrange(DISTANCE_KEY, int(start), stop)
 
     temperature = conn.lindex(TEMPERATURE_KEY, -1)
     if temperature:

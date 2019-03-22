@@ -145,95 +145,106 @@ function draw_pie(dom_name, data_light, title) {
 
 function draw_line(dom_name, data) {
     let option = {
-        backgroundColor: '#404a59',
         title: {
-            text: '最近物体实时距离',
+            text: '实时距离',
+            left: 'left',
             textStyle: {
-                fontWeight: 'normal',
-                fontSize: 20,
-                color: '#F1F1F3'
-            },
-            left: '6%'
+                color: '#fff'
+            }
         },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        backgroundColor: '#404a59',
         tooltip: {
-            trigger: 'axis', //触发类型。[ default: 'item' ] :数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用;'axis'坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用
-            axisPointer: {
-                lineStyle: {
-                    color: '#57617B'
-                }
-            }
+            trigger: 'axis'
         },
-        grid: {
-            left: '3%', //grid 组件离容器左侧的距离。
-            right: '4%', //grid 组件离容器右侧的距离。
-            bottom: '3%', //grid 组件离容器下侧的距离。
-            containLabel: true //grid 区域是否包含坐标轴的刻度标签[ default: false ]
-        },
-        xAxis: [{
-            type: 'value',
-            boundaryGap: false, //坐标轴两边留白策略，类目轴和非类目轴的设置和表现不一样
-            axisLine: {
-                lineStyle: {
-                    color: '#F1F1F3' //坐标轴线线的颜色。
-                }
-            },
+        xAxis: {
             data: data.map(function (item) {
                 let item1 = JSON.parse(item);
-                console.log(item1['time']);
                 return item1['time'];
-            })
-        }],
-        yAxis: [{
-            type: 'value', //坐标轴类型。'value' 数值轴，适用于连续数据;'category' 类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据;'time' 时间轴;'log' 对数轴.
-            name: '（cm）', //坐标轴名称。
-            axisTick: {
-                show: false //是否显示坐标轴刻度
+            }),
+            axisLine: {
+                lineStyle: {
+                    color: 'white',
+                    width: 2
+                }
+            }
+        },
+        yAxis: {
+            splitLine: {
+                show: false
             },
             axisLine: {
                 lineStyle: {
-                    color: '#F1F1F3' //坐标轴线线的颜色
-                }
-            },
-            axisLabel: {
-                margin: 10, //刻度标签与轴线之间的距离
-                textStyle: {
-                    fontSize: 14 //文字的字体大小
-                }
-            },
-            splitLine: {
-                lineStyle: {
-                    color: '#57617B' //分隔线颜色设置
+                    color: 'white',
+                    width: 2
                 }
             }
+        },
+        dataZoom: [{
+            startValue: '2017-06-01 00:00:00',
+            textStyle: {
+                color: '#8392A5'
+            },
+            dataBackground: {
+                areaStyle: {
+                    color: '#8392A5'
+                },
+                lineStyle: {
+                    opacity: 0.8,
+                    color: '#8392A5'
+                }
+            },
+        }, {
+            type: 'inside'
         }],
+        visualMap: {
+            top: 10,
+            right: 10,
+            textStyle: {
+                color: '#fff'
+            },
+            pieces: [{
+                gt: 0,
+                lte: 5,
+                color: '#096'
+            }, {
+                gt: 5,
+                lte: 10,
+                color: '#ffde33'
+            }, {
+                gt: 10,
+                lte: 30,
+                color: '#ff9933'
+            }, {
+                gt: 30,
+                lte: 60,
+                color: '#cc0033'
+            }, {
+                gt: 60,
+                lte: 90,
+                color: '#660099'
+            }, {
+                gt: 90,
+                color: '#7e0023'
+            }],
+            outOfRange: {
+                color: '#999'
+            }
+        },
         series: [{
-            name: '距离',
+            name: 'distance',
+            left: 'center',
             type: 'line',
-            smooth: true,
-            symbol: 'circle',
-            symbolSize: 5,
-            showSymbol: false,
-            lineStyle: {
-                normal: {
-                    width: 1
-                }
-            },
-            itemStyle: {
-                normal: {
-                    color: 'rgb(0,136,212)',
-                    borderColor: 'rgba(0,136,212,0.2)',
-                    borderWidth: 12
-
-                }
-            },
             data: data.map(function (item) {
-                let item1 = JSON.parse(item);
-                console.log(item1['value']);
-                return item1['value'];
+                let item2 = JSON.parse(item);
+                return item2['value'];
             })
-        },]
+        }]
     };
-
     dom_name.setOption(option);
 }
 
