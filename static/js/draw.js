@@ -13,7 +13,7 @@ function draw_gauge(dom_name, data, title) {
                 name: title,
                 type: 'gauge',
                 detail: {formatter: '{value}'},
-                data: [{value: 50, name: title}],
+                data: [{value: data, name: title}],
                 axisLine: { // 坐标轴线
                     lineStyle: { // 属性lineStyle控制线条样式
                         color: [
@@ -46,7 +46,7 @@ function draw_gauge(dom_name, data, title) {
 
 function draw_pie(dom_name, data_light, title) {
     let option = {
-            backgroundColor: '#333645',
+            backgroundColor: '#404a59',
 
             title: {
                 text: data_light,
@@ -55,7 +55,7 @@ function draw_pie(dom_name, data_light, title) {
                 textStyle: {
                     color: '#98a0c4',
                     fontWeight: 'bolder',
-                    fontSize: 64,
+                    fontSize: 32,
                 }
             },
             series: [{
@@ -72,11 +72,9 @@ function draw_pie(dom_name, data_light, title) {
                     value: 1,
                     itemStyle: {
                         normal: {
-                            color: '#313443',
+                            color: '#404a59',
                             shadowBlur: 10,
                             shadowColor: '#1b1e25',
-
-
                         }
                     }
                 }],

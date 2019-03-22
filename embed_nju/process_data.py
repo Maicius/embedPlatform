@@ -25,7 +25,7 @@ def upload_light(request):
 def pre_process_data(data, key):
     now = int(time.time())
     conn = redis.Redis(connection_pool=get_pool())
-    distance_dict = dict(time=now, value=data)
+    distance_dict = json.dumps(dict(time=now, value=data))
     print(key, '===============')
     print(distance_dict)
     conn.rpush(key, str(distance_dict))
@@ -45,8 +45,12 @@ def get_data(request):
     distance_list = conn.lrange(DISTANCE_KEY, int(start) + 1, stop)
 
     temperature = conn.lindex(TEMPERATURE_KEY, -1)
-
+    if temperature:
+        temperature = json.loads(temperature)
     light = conn.lindex(LIGHT_KEY, -1)
+
+    if light:
+        light = json.loads(light)
     result = {}
     result['distance_list'] = distance_list
     result['start'] = stop

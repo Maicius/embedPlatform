@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>智能传感器监控平台</title>
+  <title>智能小车监控平台</title>
 
 </head>
 
@@ -26,7 +26,12 @@
 {#          <input type="checkbox" checked/>#}
 {#        </div>#}
 
-        <img src="../static/image/car_light.png" class="car_light"/>
+        <div class="car_light" id="car_light"></div>
+        <div class="light_text">
+          <p style="font-size: 16px">光线强度:</p>
+          <div id="light_dom" class="light_dom">
+          </div>
+        </div>
       </div>
       <div class="col-lg-12 col-md-12 col-xs-12 big_dom" id="light">
         hello2

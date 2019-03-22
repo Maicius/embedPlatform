@@ -54,7 +54,20 @@
 .car_light {
     display: block;
     margin: 0 auto;
-    width: 60%;
-    margin-top: 100px;
-    vertical-align: center;
+    width: 30%;
+    height:72px;
+    margin-top: 20px;
+    background-image: url("../image/car_light.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.light_dom {
+    width: 100%;
+    height: 250px;
+}
+
+.light_text {
+    text-align: center;
+    color:white;
+    background: rgba(0,0,0,0) !important
 }
