@@ -1,8 +1,8 @@
 import paho.mqtt.client as mqtt
 import json
 import redis
-from ..embed_nju.util.jedis import get_pool
-from ..embed_nju.util.constant import TEMPERATURE_KEY
+from embed_nju.util.jedis import get_pool
+from embed_nju.util.constant import TEMPERATURE_KEY
 import time
 
 class MqttServer(object):
@@ -26,8 +26,8 @@ class MqttServer(object):
         # 在这里处理业务逻辑
         data = json.loads(msg.payload)
         print("mqtt Server:", data)
-        if (data is not None):
-            c1 = data[0].get("value")
+        if data is not None:
+            c1 = data.get("value")
             self.pre_process_data(c1,TEMPERATURE_KEY)
 
 def start_mqtt_server():

@@ -2,15 +2,15 @@ import logging
 import asyncio
 
 from aiocoap import *
-from ..embed_nju.util.jedis import pop_raw_data
-from ..embed_nju.util.constant import RAW_WET_KEY
+from embed_nju.util.jedis import pop_raw_data
+from embed_nju.util.constant import RAW_WET_KEY
 
 logging.basicConfig(level=logging.INFO)
 
 async def main():
     protocol = await Context.create_client_context()
     payload=pop_raw_data(RAW_WET_KEY)
-    request = Message(code=GET, payload=payload.encode(encoding='utf-8'), uri='coap://localhost/wet')
+    request = Message(code='GET', payload=payload.encode(encoding='utf-8'), uri='coap://localhost/wet')
 
     try:
         response = await protocol.request(request).response

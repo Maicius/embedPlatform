@@ -4,8 +4,8 @@ import logging
 import asyncio
 import aiocoap.resource as resource
 import aiocoap
-from ..embed_nju.util.jedis import save_data_to_redis
-from ..embed_nju.util.constant import WET_KEY
+from embed_nju.util.jedis import save_data_to_redis
+from embed_nju.util.constant import WET_KEY
 
 class TimeResource(resource.ObservableResource):
     """Example resource that can be observed. The `notify` method keeps
