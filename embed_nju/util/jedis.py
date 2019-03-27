@@ -30,3 +30,12 @@ def save_data_to_redis(data, key):
     print(distance_dict)
     conn.rpush(key, str(distance_dict))
 
+
+def push_raw_data(data, key):
+    rdb = redis.Redis(connection_pool=get_pool())
+    rdb.lpush(key, data)
+
+
+def pop_raw_data(key):
+    rdb = redis.Redis(connection_pool=get_pool())
+    return rdb.rpop(key)
