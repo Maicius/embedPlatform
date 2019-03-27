@@ -13,7 +13,7 @@ import argparse
 import serial
 import sleekxmpp
 
-from embed_nju.util.jedis import get_data_from_redis
+from embed_nju.util.jedis import pop_raw_data
 from embed_nju.util.constant import RAW_LIGHT_KEY
 
 
@@ -31,7 +31,7 @@ class SendMsgBot(sleekxmpp.ClientXMPP):
 
         # 读取光线数据
         while True:
-            light = get_data_from_redis(RAW_LIGHT_KEY)
+            light = pop_raw_data(RAW_LIGHT_KEY)
             self.send_message(mto=self.recipient,
                               mbody=light,
                               mtype='chat')
