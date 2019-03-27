@@ -8,6 +8,7 @@ import argparse
 from embed_nju.util.jedis import save_data_to_redis
 import sleekxmpp
 
+
 class EchoBot(sleekxmpp.ClientXMPP):
 
     def __init__(self, jid, password):
@@ -28,7 +29,18 @@ class EchoBot(sleekxmpp.ClientXMPP):
 
 
 def start_xmpp_server():
-    pass
+    xmpp = EchoBot('juliet@nju-forum.top', '1234')
+    xmpp.register_plugin('xep_0030')  # Service Discovery
+    xmpp.register_plugin('xep_0004')  # Data Forms
+    xmpp.register_plugin('xep_0060')  # PubSub
+    xmpp.register_plugin('xep_0199')  # XMPP Ping
+
+    if xmpp.connect():
+        xmpp.process(block=True)
+        print('Done.')
+    else:
+        print('Unable to connect.')
+
 
 if __name__ == '__main__':
     # Setup the command line arguments.
@@ -73,4 +85,3 @@ if __name__ == '__main__':
         print('Done.')
     else:
         print('Unable to connect.')
-
