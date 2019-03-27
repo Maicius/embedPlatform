@@ -51,7 +51,7 @@ let vm = avalon.define({
 });
 
 vm.$watch("light", function (new_value, old_value) {
-    if (new_value < 300) {
+    if (new_value > 1000) {
         console.log('change to light');
         $('#car_light').css("background-image", "url(\"../static/image/car_light.png\")")
     } else {

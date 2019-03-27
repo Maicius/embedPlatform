@@ -2,7 +2,7 @@ import serial
 import redis
 
 from embed_nju.util.constant import RAW_DISTANCE_KEY, RAW_TEMPERATURE_KEY, RAW_LIGHT_KEY, RAW_WET_KEY
-from embed_nju.util.jedis import get_pool, push_raw_data
+from embed_nju.util.jedis import get_pool, push_raw_data, set_raw_data
 
 
 def read_serial():
@@ -26,7 +26,7 @@ def save_raw_to_redis(data):
     elif data_type == 'distance':
         push_raw_data(data_value, RAW_DISTANCE_KEY)
     elif data_type == 'light':
-        push_raw_data(data_value, RAW_LIGHT_KEY)
+        set_raw_data(data_value, RAW_LIGHT_KEY)
     elif data_type == 'wet':
         push_raw_data(data_value, RAW_WET_KEY)
 

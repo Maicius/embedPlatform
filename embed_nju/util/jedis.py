@@ -39,3 +39,12 @@ def push_raw_data(data, key):
 def pop_raw_data(key):
     rdb = redis.Redis(connection_pool=get_pool())
     return rdb.rpop(key)
+
+def set_raw_data(data, key):
+    rdb = redis.Redis(connection_pool=get_pool())
+    return rdb.set(key, data)
+
+def get_raw_data(key):
+    rdb = redis.Redis(connection_pool=get_pool())
+    return rdb.get(key)
+

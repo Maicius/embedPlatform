@@ -25,8 +25,9 @@ class MqttServer(object):
     def on_message(self, client, userdata, msg):
         # 在这里处理业务逻辑
         data = json.loads(msg.payload)
-        print("mqtt Server:", data)
+        # print("mqtt Server:", data)
         if data is not None:
+            print("mqtt receive success---------------------")
             c1 = data.get("value")
             self.pre_process_data(c1,TEMPERATURE_KEY)
 

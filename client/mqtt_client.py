@@ -13,7 +13,7 @@ def start_mqtt_client():
     while True:
         data = pop_raw_data(RAW_TEMPERATURE_KEY)
         embed_data = {"name": "embed_temperature", "value": data}
-        print("mqtt send success")
+        print("mqtt send success---------------------")
         if data is not None:
             publish.single("paho/temperature",
                            # payload="this is message:%s" %idx,
