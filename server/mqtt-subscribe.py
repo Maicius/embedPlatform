@@ -29,7 +29,7 @@ def on_message(client, userdata, msg):
         pre_process_data(b2, c2, LIGHT_KEY)
         pre_process_data(b3, c3, TEMPERATURE_KEY)
 
-if __name__ == '__main__':
+def start_mqtt_server():
     client = mqtt.Client()
     client.on_connect = on_connect
     client.on_message = on_message
@@ -37,3 +37,6 @@ if __name__ == '__main__':
     client.connect("iot.eclipse.org", 1883, 60)
     client.subscribe("paho/temperature")
     client.loop_forever()
+
+if __name__ == '__main__':
+    start_mqtt_server()

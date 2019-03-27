@@ -27,9 +27,10 @@ class EchoBot(sleekxmpp.ClientXMPP):
         save_data_to_redis('embed_sample', msg['body'])
 
 
+def start_xmpp_server():
+    pass
 
 if __name__ == '__main__':
-
     # Setup the command line arguments.
     parser = argparse.ArgumentParser(description='XMPP Service')
 
@@ -72,3 +73,4 @@ if __name__ == '__main__':
         print('Done.')
     else:
         print('Unable to connect.')
+

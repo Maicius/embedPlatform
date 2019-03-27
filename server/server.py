@@ -91,7 +91,7 @@ class TimeResource(resource.ObservableResource):
 logging.basicConfig(level=logging.INFO)
 logging.getLogger("coap-server").setLevel(logging.DEBUG)
 
-def main():
+def start_coap_server():
     # Resource tree creation
     root = resource.Site()
 
@@ -106,4 +106,4 @@ def main():
     asyncio.get_event_loop().run_forever()
 
 if __name__ == "__main__":
-    main()
+    start_coap_server()
