@@ -34,5 +34,9 @@ def send_simulate():
         send_packet_by_http(data)
         sleep(1)
 
-if __name__ == '__main__':
+def start_http_client():
     send_simulate()
+    # read_serial()
+
+if __name__ == '__main__':
+    start_http_client()
