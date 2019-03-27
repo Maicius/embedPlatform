@@ -1,8 +1,8 @@
 import paho.mqtt.client as mqtt
 import json
 import redis
-from .util.jedis import get_pool
-from .util.constant import DISTANCE_KEY,TEMPERATURE_KEY, LIGHT_KEY
+from embed_nju.util.jedis import get_pool
+from embed_nju.util.constant import DISTANCE_KEY,TEMPERATURE_KEY, LIGHT_KEY
 
 data=[{}]
 def pre_process_data(time_str,data, key):
@@ -29,11 +29,11 @@ def on_message(client, userdata, msg):
         pre_process_data(b2, c2, LIGHT_KEY)
         pre_process_data(b3, c3, TEMPERATURE_KEY)
 
+if __name__ == '__main__':
+    client = mqtt.Client()
+    client.on_connect = on_connect
+    client.on_message = on_message
 
-client = mqtt.Client()
-client.on_connect = on_connect
-client.on_message = on_message
-
-client.connect("iot.eclipse.org", 1883, 60)
-client.subscribe("paho/temperature")
-client.loop_forever()
+    client.connect("iot.eclipse.org", 1883, 60)
+    client.subscribe("paho/temperature")
+    client.loop_forever()

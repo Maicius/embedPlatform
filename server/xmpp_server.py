@@ -5,11 +5,8 @@ import logging
 import getpass
 
 import argparse
-
+from embed_nju.util.jedis import save_data_to_redis
 import sleekxmpp
-
-import redis_lib
-
 
 class EchoBot(sleekxmpp.ClientXMPP):
 
@@ -27,7 +24,8 @@ class EchoBot(sleekxmpp.ClientXMPP):
         #     msg.reply("Thanks for sending:\n%(body)s" % msg).send()
         # 这里写对信息的处理操作
 
-        redis_lib.save_data('embed_sample', msg['body'])
+        save_data_to_redis('embed_sample', msg['body'])
+
 
 
 if __name__ == '__main__':

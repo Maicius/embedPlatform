@@ -2,7 +2,8 @@
 import traceback
 
 import redis
-
+import time
+import json
 # 封装redis的操作，统一数据接口
 # 为没有安装redis的用户提供保存到json文件的接口
 host = '127.0.0.1'
@@ -18,4 +19,14 @@ def print_redis_error(e):
     print(msg)
     print("redis failed to connect, please check redis config")
     print("now the data would to save into json file only")
+
+def save_data_to_redis(data, key):
+    now = int(time.time())
+    timeArray = time.localtime(now)
+    time_str = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
+    conn = redis.Redis(connection_pool=get_pool())
+    distance_dict = json.dumps(dict(time=time_str, value=data))
+    print(key, '===============')
+    print(distance_dict)
+    conn.rpush(key, str(distance_dict))
 
