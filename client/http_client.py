@@ -15,7 +15,7 @@ def send_packet_by_http(data):
     elif data_type == 'light':
         url = url + 'upload_light?' + data_type + '=' + data_value
 
-    print(url)
+    print("http:" + url)
     requests.get(url)
 
 def read_serial():
@@ -26,13 +26,18 @@ def read_serial():
 
 def send_simulate():
     while True:
-        data = 'temperature:10'
-        send_packet_by_http(data)
-        data = 'distance:10'
-        send_packet_by_http(data)
-        data = 'light:10'
-        send_packet_by_http(data)
-        sleep(1)
+        try:
+            data = 'temperature:10'
+            send_packet_by_http(data)
+            data = 'distance:10'
+            send_packet_by_http(data)
+            data = 'light:10'
+            send_packet_by_http(data)
+            sleep(1)
+        except BaseException as e:
+            print('Http Client Error Begin========================')
+            print(e)
+            print('Http Client Error End========================')
 
 def start_http_client():
     send_simulate()
