@@ -7,6 +7,9 @@ from client.http_client import start_http_client
 from client.mqtt_client import start_mqtt_client
 import multiprocessing
 
+"""
+start all servers and clients
+"""
 
 if __name__ == '__main__':
 
