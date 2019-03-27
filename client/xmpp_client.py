@@ -69,6 +69,18 @@ class SendMsgBot(sleekxmpp.ClientXMPP):
         self.disconnect(wait=True)
 
 
+def start_xmpp_client():
+    xmpp = SendMsgBot('romeo@nju-forum.top', '1234', 'juliet@nju-forum.top')
+    xmpp.register_plugin('xep_0030')  # Service Discovery
+    xmpp.register_plugin('xep_0199')  # XMPP Ping
+
+    if xmpp.connect():
+        xmpp.process(block=True)
+        print('Done.')
+    else:
+        print('Unable to connect.')
+
+
 if __name__ == '__main__':
 
     # Setup the command line arguments.
