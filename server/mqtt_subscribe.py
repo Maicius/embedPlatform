@@ -1,14 +1,18 @@
 import paho.mqtt.client as mqtt
 import json
 import redis
-from embed_nju.util.jedis import get_pool
-from embed_nju.util.constant import DISTANCE_KEY,TEMPERATURE_KEY, LIGHT_KEY
+from ..embed_nju.util.jedis import get_pool
+from ..embed_nju.util.constant import TEMPERATURE_KEY
+import time
 
 class MqttServer(object):
     def __init__(self):
         self.data = [{}]
 
-    def pre_process_data(self, time_str, data, key):
+    def pre_process_data(self, data, key):
+        now = int(time.time())
+        timeArray = time.localtime(now)
+        time_str = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
         conn = redis.Redis(connection_pool=get_pool())
         distance_dict = json.dumps(dict(time=time_str, value=data))
         conn.rpush(key, str(distance_dict))
@@ -23,15 +27,8 @@ class MqttServer(object):
         data = json.loads(msg.payload)
         print("mqtt Server:", data)
         if (data is not None):
-            b1 = data[0].get("time")
-            b2 = data[1].get("time")
-            b3 = data[2].get("time")
             c1 = data[0].get("value")
-            c2 = data[1].get("value")
-            c3 = data[2].get("value")
-            self.pre_process_data(b1, c1, DISTANCE_KEY)
-            self.pre_process_data(b2, c2, LIGHT_KEY)
-            self.pre_process_data(b3, c3, TEMPERATURE_KEY)
+            self.pre_process_data(c1,TEMPERATURE_KEY)
 
 def start_mqtt_server():
     server = MqttServer()
