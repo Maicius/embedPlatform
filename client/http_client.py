@@ -18,11 +18,7 @@ def send_packet_by_http(data):
     print("http:" + url)
     requests.get(url)
 
-def read_serial():
-    with serial.Serial('/dev/tty', 9600) as ser:
-        while True:
-            data = ser.readline().decode()
-            send_packet_by_http(data)
+
 
 def send_simulate():
     while True:
