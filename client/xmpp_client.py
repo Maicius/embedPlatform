@@ -13,6 +13,9 @@ import argparse
 import serial
 import sleekxmpp
 
+from embed_nju.util.jedis import get_data_from_redis
+from embed_nju.util.constant import RAW_LIGHT_KEY
+
 
 class SendMsgBot(sleekxmpp.ClientXMPP):
 
@@ -26,45 +29,12 @@ class SendMsgBot(sleekxmpp.ClientXMPP):
         self.send_presence()
         self.get_roster()
 
-        # with serial.Serial('/dev/cu.usbmodem1411', 9600) as ser:
-        #     print(ser)
-        #     light = 0
-        #     distance = 0
-
-        #     while True:
-        #         line = ser.readline().decode()
-        #         if line.startswith('light:'):
-        #             light = int(line.split(':')[1])
-        #             msg = json.dumps({
-        #                 'type': 'embed_light',
-        #                 'value': light,
-        #                 'time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        #             })
-        #             self.send_message(mto=self.recipient,
-        #                               mbody=msg,
-        #                               mtype='chat')
-
-        #         if line.startswith('distance:'):
-        #             distance = float(line.split(':')[1])
-        #             msg = json.dumps({
-        #                 'type': 'embed_distance',
-        #                 'value': distance,
-        #                 'time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        #             })
-        #             self.send_message(mto=self.recipient,
-        #                               mbody=msg,
-        #                               mtype='chat')
-
+        # 读取光线数据
         while True:
-            time.sleep(1)
-            msg = json.dumps({
-                'type': 'embed_sample',
-                'value': 'hahahah',
-                'time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            })
+            light = get_data_from_redis(RAW_LIGHT_KEY)
             self.send_message(mto=self.recipient,
-                              mbody=msg,
-                              mtype='CHAT')
+                              mbody=light,
+                              mtype='chat')
 
         self.disconnect(wait=True)
 
