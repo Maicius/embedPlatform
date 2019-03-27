@@ -1,20 +1,14 @@
 import serial
 import requests
 from time import sleep
+from embed_nju.util.jedis import get_raw_data
+from embed_nju.util.constant import RAW_DISTANCE_KEY, RAW_TEMPERATURE_KEY, RAW_LIGHT_KEY, RAW_WET_KEY
 
 def send_packet_by_http(data):
-    data = data.split(':')
-    data_type = data[0]
-    data_value = data[1]
 
     url = 'http://localhost:8000/'
-    if data_type == 'temperature':
-        url = url + 'upload_temperature?' + data_type + '=' + data_value
-    elif data_type == 'distance':
-        url = url + 'upload_distance?' + data_type + '=' + data_value
-    elif data_type == 'light':
-        url = url + 'upload_light?' + data_type + '=' + data_value
 
+    url = url + 'upload_distance?distance=' + data
     print("http:" + url)
     requests.get(url)
 
@@ -36,8 +30,18 @@ def send_simulate():
             print('Http Client Error End========================')
 
 def start_http_client():
-    send_simulate()
-    # read_serial()
+
+    # send_simulate()
+    print("Start http client----------------")
+    while True:
+        try:
+            data = get_raw_data(RAW_DISTANCE_KEY)
+            if data:
+                send_packet_by_http(data)
+            sleep(1)
+        except:
+            pass
+
 
 if __name__ == '__main__':
     start_http_client()
