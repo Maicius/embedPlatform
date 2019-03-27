@@ -21,7 +21,7 @@ class MqttServer(object):
     def on_message(self, client, userdata, msg):
         # 在这里处理业务逻辑
         data = json.loads(msg.payload)
-        print(data)
+        print("mqtt Server:", data)
         if (data is not None):
             b1 = data[0].get("time")
             b2 = data[1].get("time")

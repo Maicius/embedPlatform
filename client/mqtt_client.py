@@ -12,8 +12,8 @@ def start_mqtt_client():
                   {"name": "embed_temperature", "time": "2019-03-22 14:47:18", "value": "74"}]
 
     while True:
-        print(json.dumps(embed_data))
-        print("send success")
+        # print(json.dumps(embed_data))
+        print("mqtt send success")
         publish.single("paho/temperature",
                        # payload="this is message:%s" %idx,
                        payload=json.dumps(embed_data),
