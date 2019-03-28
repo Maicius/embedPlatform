@@ -9,4 +9,4 @@ RAW_TEMPERATURE_KEY = 'raw_embed_temperature'
 RAW_LIGHT_KEY = 'raw_embed_light'
 RAW_WET_KEY = 'raw_embed_wet'
 
-SERIAL_NAME = '/dev/cu.usbmodem1411'
+SERIAL_NAME = '/dev/cu.usbmodem1451'
