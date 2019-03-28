@@ -1,65 +1,56 @@
-#!/usr/bin/env python3
-import datetime
-import logging
-import asyncio
-import aiocoap.resource as resource
-import aiocoap
+import time
+from coapthon.server.coap import CoAP
+from coapthon.resources.resource import Resource
 from embed_nju.util.jedis import save_data_to_redis
 from embed_nju.util.constant import WET_KEY
 
-class TimeResource(resource.ObservableResource):
-    """Example resource that can be observed. The `notify` method keeps
-    scheduling itself, and calles `update_state` to trigger sending
-    notifications."""
+class BasicResource(Resource):
+    def __init__(self, name="BasicResource", coap_server=None):
+        super(BasicResource, self).__init__(
+            name,
+            coap_server,
+            visible=True,
+            observable=True,
+            allow_children=True)
+        self.payload = "Basic Resource"
+        self.resource_type = "rt1"
+        self.content_type = "text/plain"
+        self.interface_type = "if1"
 
-    def __init__(self):
-        super().__init__()
+    def render_GET(self, request):
+        return self
 
-        self.handle = None
+    def render_PUT(self, request):
+        self.edit_resource(request)
+        return self
 
-    def notify(self):
-        self.updated_state()
-        self.reschedule()
-
-    def reschedule(self):
-        self.handle = asyncio.get_event_loop().call_later(5, self.notify)
-
-    def update_observation_count(self, count):
-        if count and self.handle is None:
-            print("Starting the clock")
-            self.reschedule()
-        if count == 0 and self.handle:
-            print("Stopping the clock")
-            self.handle.cancel()
-            self.handle = None
-
-    async def render_get(self, request):
-        # payload = datetime.datetime.now().\
-        #         strftime("%Y-%m-%d %H:%M").encode('ascii')
-        # 数据存到redis中
+    def render_POST(self, request):
+        res = self.init_resource(request, BasicResource())
+        # print('========================================')
         data=request.payload
-        save_data_to_redis(data.decode(encoding='utf-8'),WET_KEY)
-        return aiocoap.Message(payload=data)
+        save_data_to_redis(data,WET_KEY)
+        # print(request.payload)
+        return res
+
+    def render_DELETE(self, request):
+        return True
 
 
-# logging setup
-
-logging.basicConfig(level=logging.INFO)
-logging.getLogger("coap-server").setLevel(logging.DEBUG)
+class CoAPServer(CoAP):
+    def __init__(self, host, port):
+        CoAP.__init__(self, (host, port))
+        self.add_resource('wet/', BasicResource())
 
 
 def start_coap_server():
-    # Resource tree creation
-    root = resource.Site()
-
-    root.add_resource(('.well-known', 'core'),
-                      resource.WKCResource(root.get_resources_as_linkheader))
-    root.add_resource(('wet', ), TimeResource())
-
-    asyncio.Task(aiocoap.Context.create_server_context(root))
-
-    asyncio.get_event_loop().run_forever()
+    server = CoAPServer("0.0.0.0", 5683)
+    try:
+        server.listen(10)
+    except KeyboardInterrupt:
+        print("Server Shutdown")
+        server.close()
+        print("Exiting...")
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     start_coap_server()
