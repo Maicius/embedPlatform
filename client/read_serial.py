@@ -1,12 +1,12 @@
 import serial
 import redis
 
-from embed_nju.util.constant import RAW_DISTANCE_KEY, RAW_TEMPERATURE_KEY, RAW_LIGHT_KEY, RAW_WET_KEY
+from embed_nju.util.constant import RAW_DISTANCE_KEY, RAW_TEMPERATURE_KEY, RAW_LIGHT_KEY, RAW_WET_KEY, SERIAL_NAME
 from embed_nju.util.jedis import get_pool, push_raw_data, set_raw_data
 import time
 
 def read_serial():
-    with serial.Serial('/dev/cu.usbmodem1411', 9600) as ser:
+    with serial.Serial(SERIAL_NAME, 9600) as ser:
         while True:
             try:
                 data = ser.readline().decode().strip()

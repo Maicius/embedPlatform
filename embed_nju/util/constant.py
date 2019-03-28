@@ -8,3 +8,5 @@ RAW_DISTANCE_KEY = 'raw_embed_distance'
 RAW_TEMPERATURE_KEY = 'raw_embed_temperature'
 RAW_LIGHT_KEY = 'raw_embed_light'
 RAW_WET_KEY = 'raw_embed_wet'
+
+SERIAL_NAME = '/dev/cu.usbmodem1411'
