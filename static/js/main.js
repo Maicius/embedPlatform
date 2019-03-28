@@ -1,6 +1,7 @@
 let temp_dom = echarts.init(document.getElementById(TEMPERATURE_DOM));
 let light_dom = echarts.init(document.getElementById(LIGHT_DOM));
 let distance_dom = echarts.init(document.getElementById(DISTANCE_DOM));
+let wet_dom = echarts.init(document.getElementById(WET_DOM));
 
 let vm = avalon.define({
     $id: 'platform',
@@ -8,6 +9,7 @@ let vm = avalon.define({
     temperature: '0',
     light: '0',
     start: 0,
+    wet: '0',
     structure_similarity_degree: 0,
     fresh_data: function () {
         $.ajax({
@@ -29,6 +31,10 @@ let vm = avalon.define({
                     vm.light = data.light.value;
                     vm.draw_light();
                 }
+                if(data.wet){
+                    vm.wet = data.wet.value;
+                    vm.draw_wet();
+                }
                 vm.start = data.start;
 
             }
@@ -46,6 +52,10 @@ let vm = avalon.define({
     draw_distance: function () {
         console.log("draw line");
         draw_line(distance_dom, vm.distance_list);
+    },
+    
+    draw_wet: function () {
+      draw_gauge(wet_dom, vm.wet, "空气湿度");
     }
 
 });

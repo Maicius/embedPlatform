@@ -13,5 +13,7 @@ def clear_table():
     conn.delete(constant.DISTANCE_KEY)
     conn.delete(constant.WET_KEY)
 
+    print("success to clear redis")
+
 if __name__ == '__main__':
     clear_table()

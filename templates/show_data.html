@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>智能小车监控平台</title>
+    <meta charset="UTF-8">
+    <title>智能小车监控平台</title>
 
 </head>
 
 <body ms-controller="platform">
 
 <div class="wrap space_content">
-  <!--顶部导航栏-->
-  <div class="navbar navbar-fixed-top my_nav">
-    <div class="navbar-header">
-      <a class="navbar-brand navbar-brand-name navbar_name"><i class="fa fa-square-o "></i>智能小车监控平台<img
-        src="../static/image/car.png" class="car_icon"/>&nbsp;</a>
-    </div>
-  </div>
-  <div class="col-md-8 col-lg-8 col-xs-12 main_content">
-    <div class="dom">
-      <div class="col-lg-6 col-md-6 col-xs-12 small_dom" id="temperature">
-        油箱温度
-      </div>
-      <div class="col-lg-6 col-md-6 col-xs-12 small_dom">
-{#        <div class="bootstrap-switch bootstrap-switch-large" data-on="primary" data-off="info">#}
-{#          <input type="checkbox" checked/>#}
-{#        </div>#}
-
-        <div class="car_light" id="car_light"></div>
-        <div class="light_text">
-
-          <div id="light_dom" class="light_dom">
-
-          </div>
-          <p style="font-size: 16px">光线过暗时会自动打开车灯</p>
+    <!--顶部导航栏-->
+    <div class="navbar navbar-fixed-top my_nav">
+        <div class="navbar-header">
+            <a class="navbar-brand navbar-brand-name navbar_name"><i class="fa fa-square-o "></i>智能小车监控平台<img
+                    src="../static/image/car.png" class="car_icon"/>&nbsp;</a>
         </div>
-      </div>
-      <div class="col-lg-12 col-md-12 col-xs-12 big_dom" id="distance_dom">
-        hello2
-      </div>
     </div>
-  </div>
+    <div class="col-md-8 col-lg-8 col-xs-12 main_content">
+        <div class="dom">
+            <div class="col-lg-4 col-md-4 col-xs-12 small_dom" id="temperature">
+                油箱温度
+            </div>
+            <div class="col-lg-4 col-md-4 col-xs-12 small_dom">
+                {#        <div class="bootstrap-switch bootstrap-switch-large" data-on="primary" data-off="info">#}
+                {#          <input type="checkbox" checked/>#}
+                {#        </div>#}
+
+                <div class="car_light" id="car_light"></div>
+                <div class="light_text">
+
+                    <div id="light_dom" class="light_dom">
+
+                    </div>
+                    <p style="font-size: 16px">光线过暗时会自动打开车灯</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-xs-12 small_dom" id="wet_dom">
+                空气湿度
+            </div>
+            <div class="col-lg-12 col-md-12 col-xs-12 big_dom" id="distance_dom">
+                hello2
+            </div>
+        </div>
+    </div>
 
 </div>
 

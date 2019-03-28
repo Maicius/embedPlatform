@@ -7,10 +7,13 @@ import json
 # 封装redis的操作，统一数据接口
 # 为没有安装redis的用户提供保存到json文件的接口
 host = '127.0.0.1'
+pool = redis.ConnectionPool(host=host, port=6379, decode_responses=True, max_connections=1000)
 def get_pool():
     try:
-        pool = redis.ConnectionPool(host=host, port=6379, decode_responses=True, max_connections=1000)
-        return pool
+        if pool:
+            return pool
+        else:
+            return redis.ConnectionPool(host=host, port=6379, decode_responses=True, max_connections=1000)
     except BaseException as e:
         print_redis_error(e)
 

@@ -6,12 +6,14 @@ from embed_nju.util.jedis import get_pool, push_raw_data, set_raw_data
 import time
 
 def read_serial():
-    with serial.Serial('/dev/cu.usbmodem1451', 9600) as ser:
+    with serial.Serial('/dev/cu.usbmodem1411', 9600) as ser:
         while True:
             try:
                 data = ser.readline().decode().strip()
-                print(data)
                 if data:
+                    print("serial data begin:============")
+                    print(data)
+                    print("serial data end:============")
                     save_raw_to_redis(data)
             except:
                 print("no data")
