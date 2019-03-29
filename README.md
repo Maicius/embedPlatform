@@ -1,6 +1,6 @@
 # A Simple Embedded Cloud Computing Platform Based on Arduino
 
-<i>Embedded</i> Course Homework of Software College of Nanjing University. Four network protocols are required to transmit data from four sensors on ardunio.
+<i>Embedded</i> Course Homework of Software College of Nanjing University. Four network protocols are required to transmit data from four sensors on ardunio to cloud platfrom.
 
 ![](./image/ui.JPG)
 
