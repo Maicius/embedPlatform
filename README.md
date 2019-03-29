@@ -20,6 +20,10 @@ It's a multiprocess program, including the following processes:
 And code for ardunio was attched.
 
 
-Here follows the structure for paltform:
+### structure for paltform:
 
 ![](./image/structure.png)
+
+### Developers
+
+- Maicius
