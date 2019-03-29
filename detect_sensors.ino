@@ -1,5 +1,5 @@
 #include <dht11.h>
-
+#include "SR04.h"
 dht11 DHT11;
 #define DHT11PIN 8
 #define TRIG_PIN 2
@@ -27,7 +27,7 @@ int k;
 float median_filter(float raw_val, int length_list, int k);
 
 int loop_count = 0;
-
+SR04 sr04 = SR04(ECHO_PIN, TRIG_PIN);
 float getDistance() {
   float cm;
   digitalWrite(TRIG_PIN, LOW);
@@ -80,17 +80,19 @@ void loop() {
   Serial.print("light:");
   Serial.println(darkness);
 
-  dist = getDistance();
+  dist = sr04.Distance();
   if (loop_count > DEFAULT_COUNT) {
     k = loop_count % DEFAULT_COUNT;
     length_list = DEFAULT_COUNT;
   } else {
-    length_list = loop_count;
+    length_list = loop_count + 1;
     k = loop_count;
   }
+  Serial.print("length list:");
+  Serial.println((long)length_list);
   median_distance = median_filter(dist, length_list, k);
   Serial.print("distance:");
-  Serial.println((long)dist);
+  Serial.println((long)median_distance);
   if (darkness > darkThreshold) {
     digitalWrite(pinBuzzer, LOW);
   } else {
@@ -100,16 +102,16 @@ void loop() {
   int chk = DHT11.read(DHT11PIN);
   humidity = (float)DHT11.humidity;
   Serial.print("wet:");
-  Serial.println(humidity);
+  Serial.println((long)humidity);
   temperature = (float)DHT11.temperature;
   Serial.print("temperature:");
-  Serial.println(temperature);
+  Serial.println((long)temperature);
   loop_count++;
   delay(1000);
-
+  
 }
 
-// 中位值滤波
+// 均值滤波
 float median_filter(float raw_val, int length_list, int k) {
   avgDistanceList[k] = raw_val;
   float sum = 0;
