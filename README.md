@@ -23,7 +23,3 @@ And code for ardunio was attched.
 ### structure for paltform:
 
 ![](./image/structure.png)
-
-### Developers
-
-- Maicius
