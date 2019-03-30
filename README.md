@@ -20,6 +20,6 @@ It's a multiprocess program, including the following processes:
 And code for ardunio was attched.
 
 
-### structure for paltform:
+### Structure for the Platform:
 
 ![](./image/structure.png)
